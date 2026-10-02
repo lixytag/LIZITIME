@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>369 时间查看器</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #121418;
+            color: #e8e8e8;
+            font-family: 'Consolas', monospace;
+        }
+        #time {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #42a5f5;
+            text-shadow: 0 0 20px rgba(66, 165, 245, 0.5);
+        }
+        #date {
+            font-size: 1.2rem;
+            color: #b0b8c4;
+            margin-top: 10px;
+        }
+        #label {
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div id="time">00:00:00</div>
+    <div id="date">加载中...</div>
+    <div id="label">369 工作室 · 时间查看器</div>
+
+    <script>
+        function updateTime() {
+            const now = new Date();
+            
+            // 格式化时间
+            const hh = String(now.getHours()).padStart(2, '0');
+            const mm = String(now.getMinutes()).padStart(2, '0');
+            const ss = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('time').innerText = `${hh}:${mm}:${ss}`;
+
+            // 格式化日期
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const weekDays = ['日', '一', '二', '三', '四', '五', '六'];
+            const week = weekDays[now.getDay()];
+            document.getElementById('date').innerText = `${year}年${month}月${day}日 星期${week}`;
+        }
+
+        // 每秒更新一次
+        setInterval(updateTime, 1000);
+        updateTime();
+    </script>
+</body>
+</html>
